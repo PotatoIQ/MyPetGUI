@@ -1,0 +1,87 @@
+options:
+	prefix: "&7[&aMyPetGUI&7] " #You can change it to "" to disable the prefix that displays in the script messages
+	gui_title: "&8&lMyPet GUI Manager:" #Title of the GUI which displays on top of the GUI
+	gui_permission: mypetgui.gui #The permission given to the player to use the command
+	gui_permission_message: "%{@prefix}%&cYou don't have permission to open MyPetGUI." #message that will display if player don't have reiquiered permission to use the command
+	gui_empty_slots_filler: gray stained glass pane #item that will fill the empty slots of the GUI
+
+command /pet:
+	description: Open a GUI that displays MyPet commands
+	permission: {@gui_permission}
+	permission message: {@gui_permission_message}
+	executable by: players
+	aliases: /petgui, /pg
+	trigger:
+		wait 1 tick
+		open virtual chest inventory with size 5 named {@gui_title} to player
+		wait 1 tick
+		format gui slot 0 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 1 of player with chest named "&ePet Inventory" with lore "","&7Open pet's inventory" to close then run function run_p_cmd(player, "/petinventory")
+		format gui slot 2 of player with beacon named "&bPet Beacon" with lore "","&7Choose beacon effect for pet" to close then run function run_p_cmd(player, "/petbeacon")
+		format gui slot 3 of player with spruce sapling named "&aChoose Skill Tree" with lore "","&7Choose skill for pet" to close then run function run_p_cmd(player, "/petchooseskilltree")
+		format gui slot 4 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 5 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 6 of player with saddle named "&aCall Pet" with lore "","&7Call a sent away pet to you" to close then run function run_p_cmd(player, "/petcall")
+		format gui slot 7 of player with lead named "&cSend Pet Away" with lore "","&7Send away current pet" to close then run function run_p_cmd(player, "/petsendaway")
+		format gui slot 8 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 9 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 10 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 11 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 12 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 13 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 14 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 15 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 16 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 17 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 18 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 19 of player with red bed named "&cStore Pet" with lore "","&7Store current pet to pets storage" to close then run function run_p_cmd(player, "/petstore")
+		format gui slot 20 of player with bee spawn egg named "&aChoose Pet" with lore "","&7Pick a pet from pets storage" to close then run function run_p_cmd(player, "/petswitch")
+		format gui slot 21 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 22 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 23 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 24 of player with hopper named "&eToggle Pet Item Pickup" with lore "","&7Toggle pet picking up items" to close then run function run_p_cmd(player, "/petpickup")
+		format gui slot 25 of player with diamond sword named "&ePet Behavior" with lore "","&7Choose a behavior for your pet" to close then execute console command "ptbehavior %player%"
+		format gui slot 26 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 27 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 28 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 29 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 30 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 31 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 32 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 33 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 34 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 35 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 36 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 37 of player with book and quill named "&aPet Info" with lore "","&7Display information about current pet" to close then run function run_p_cmd(player, "/petinfo")
+		format gui slot 38 of player with paper named "&eCurrent Pet Skill Details" with lore "","&7Display current skill details about your pet" to close then run function run_p_cmd(player, "/petskill")
+		format gui slot 39 of player with minecart with chest named "&ePets Shop" with lore "","&7Buy new pet from the pets shop" to close then run function run_p_cmd(player, "/petshop")
+		format gui slot 40 of player with {@gui_empty_slots_filler} named " "
+		format gui slot 41 of player with name tag named "&eRename Pet" with lore "","&7Rename your pet" to close then run function run_p_cmd(player, "/petname")
+		format gui slot 42 of player with gold nugget named "&eTrade Pet With Someone" with lore "","&7Trade your pet with someone" to close then run function run_p_cmd(player, "/pettrade")
+		format gui slot 43 of player with tnt named "&cDelete Pet" with lore "","&7Delete current pet permanently" to close then run function run_p_cmd(player, "/petrelease")
+		format gui slot 44 of player with {@gui_empty_slots_filler} named " "
+
+command /ptbehavior <player>: #to open the Pet Bevahior GUI
+	description: Open a GUI that displays MyPet Bevahior
+	permission: {@gui_permission}
+	permission message: {@gui_permission_message}
+	executable by: players and console
+	aliases: /pgbehavior, /pgb, /ptb
+	trigger:
+		set {_p} to arg-1
+		wait 1 tick
+		open virtual chest inventory with size 1 named "&8&lMyPet Behavior:" to {_p}
+		wait 1 tick
+		format gui slot 0 of {_p} with {@gui_empty_slots_filler} named " "
+		format gui slot 1 of {_p} with armor stand named "&aFriendly" with lore "&7Pet will not fight even", "&7when it is attacked by anything" to close then run function run_p_cmd({_p}, "/petbehavior Friendly")
+		format gui slot 2 of {_p} with {@gui_empty_slots_filler} named " "
+		format gui slot 3 of {_p} with lead named "&eNormal" with lore "&7Pet will act like a normal wolf" to close then run function run_p_cmd({_p}, "/petbehavior Normal")
+		format gui slot 4 of {_p} with {@gui_empty_slots_filler} named " "
+		format gui slot 5 of {_p} with diamond axe named "&cDuel" with lore "&7Pet will attack other pets with", "&7active duel behavior within a 5 block radius" to close then run function run_p_cmd({_p}, "/petbehavior Duel")
+		format gui slot 6 of {_p} with {@gui_empty_slots_filler} named " "
+		format gui slot 7 of {_p} with diamond sword named "&4Aggressive" with lore "&7Pet attacks automatically everything within", "&715 blocks of the owner" to close then run function run_p_cmd({_p}, "/petbehavior Aggressive")
+		format gui slot 8 of {_p} with {@gui_empty_slots_filler} named " "
+
+function run_p_cmd(p: player,cmd: text): #Adds a neccessry delay between excuting the player command and closing the GUI window
+	wait 1 tick
+	execute {_p} command "%{_cmd}%"
