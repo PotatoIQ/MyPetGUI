@@ -1,5 +1,5 @@
 # MyPetGUI
-A simple Skript's script that adds a GUI/Meu for MyPet commands
+A simple Skript's script that adds a GUI/Menu for MyPet commands
 
 ![Image of Yaktocat](https://i.imgur.com/AKfX2m9.png)
 
