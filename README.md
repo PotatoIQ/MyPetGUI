@@ -29,13 +29,13 @@ You Must have the following plugins in order for the script to work:
 - [x] mypetgui.* | Admin permission for the plugin.
 - [x] mypetgui.reload | Reload the configuration of the plugin "/mypetgui reload".
 
-# Support & Suggestions
+### Support & Suggestions
 Feel free to add me in discord: TatoIQ#7348 or join my discord server: http://discord.tatomc.com. If you run into any issues feel free to send them to me in discord or post them in github: https://github.com/PotatoIQ/MyPetGUI/issues
 
-# Future Plans
-[ ] Trading Menu which will show online players and teleport you to them and executes the trade command once they are near you
-[ ] Optional PetTool Command, a tool which allows you to execute commands you choose when u right/left click sneaking or standing on the tool.
-[ ]- A GUI for customizing the tool per player preference
-[x] ~~YML config file to Edit items, names, lores, of GUI items~~
-[ ] Petbehaviors Menu will be adaptive to the permissions the player has and the behaviors available for that pet in its current skilltree state
-[x] ~~Add Permissions~~
+### Future Plans
+- [ ] Trading Menu which will show online players and teleport you to them and executes the trade command once they are near you
+- [ ] Optional PetTool Command, a tool which allows you to execute commands you choose when u right/left click sneaking or standing on the tool.
+- [ ]- A GUI for customizing the tool per player preference
+- [x] ~~YML config file to Edit items, names, lores, of GUI items~~
+- [ ] Petbehaviors Menu will be adaptive to the permissions the player has and the behaviors available for that pet in its current skilltree state
+- [x] ~~Add Permissions~~
