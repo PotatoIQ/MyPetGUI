@@ -1,4 +1,4 @@
-# MyPetGUI
+# MyPetGUI Menu & Tools - Skript
 A Skript that adds a GUI/Menu for MyPet commands, and an optional tool to execute the commands.
 
 ![Image of Yaktocat](https://i.imgur.com/AKfX2m9.png)
