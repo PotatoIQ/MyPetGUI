@@ -1,87 +1,213 @@
 options:
-	prefix: "&7[&aMyPetGUI&7] " #You can change it to "" to disable the prefix that displays in the script messages
-	gui_title: "&8&lMyPet GUI Manager:" #Title of the GUI which displays on top of the GUI
-	gui_permission: mypetgui.gui #The permission given to the player to use the command
-	gui_permission_message: "%{@prefix}%&cYou don't have permission to open MyPetGUI." #message that will display if player don't have reiquiered permission to use the command
-	gui_empty_slots_filler: gray stained glass pane #item that will fill the empty slots of the GUI
+	#Choose what the player types to open MyPetGUI Menu
+	mypet_command: /pet
 
-command /pet:
+	#Choose wither to drop the pet tool on ground or just send message to player when they don't have enough space in their inventory
+	mypet_tool_fullinv: "msg" #options: "drop", "msg"
+	
+	#Title of the GUI which displays on top of the GUI
+	mypet_gui_title: "MyPet Menu: &8(select option)"
+
+	#The permission given to the player to use the command to open MyPet Menu
+	mypet_gui_permission: mypetgui.gui
+	
+	#item that will fill the empty slots of the GUI
+	mypet_gui_empty_slots_filler: gray stained glass pane
+
+	#MyPet Command Tool
+	mypet_tool: lead
+
+	#Name of MyPet Command Tool
+	mypet_tool_name: "&3MyPet Command Tool"
+	
+	#The permission given to the player to receive MyPet Command Tool
+	mypet_tool_permission: mypetgui.tool
+
+	#cool down for receiving MyPet Command Tool
+	mypet_tool_cooldown: 3 hours
+
+	#permission for bypass cool down for receiving MyPet Command Tool
+	mypet_tool_cooldown_bypass_permission: mypetgui.tool.cooldown.bypass
+
+command {@mypet_command}:
 	description: Open a GUI that displays MyPet commands
-	permission: {@gui_permission}
-	permission message: {@gui_permission_message}
+	permission: {@mypet_gui_permission}
 	executable by: players
 	aliases: /petgui, /pg
 	trigger:
-		wait 1 tick
-		open virtual chest inventory with size 5 named {@gui_title} to player
-		wait 1 tick
-		format gui slot 0 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 1 of player with chest named "&ePet Inventory" with lore "","&7Open pet's inventory" to close then run function run_p_cmd(player, "/petinventory")
-		format gui slot 2 of player with beacon named "&bPet Beacon" with lore "","&7Choose beacon effect for pet" to close then run function run_p_cmd(player, "/petbeacon")
-		format gui slot 3 of player with spruce sapling named "&aChoose Skill Tree" with lore "","&7Choose skill for pet" to close then run function run_p_cmd(player, "/petchooseskilltree")
-		format gui slot 4 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 5 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 6 of player with saddle named "&aCall Pet" with lore "","&7Call a sent away pet to you" to close then run function run_p_cmd(player, "/petcall")
-		format gui slot 7 of player with lead named "&cSend Pet Away" with lore "","&7Send away current pet" to close then run function run_p_cmd(player, "/petsendaway")
-		format gui slot 8 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 9 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 10 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 11 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 12 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 13 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 14 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 15 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 16 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 17 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 18 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 19 of player with red bed named "&cStore Pet" with lore "","&7Store current pet to pets storage" to close then run function run_p_cmd(player, "/petstore")
-		format gui slot 20 of player with bee spawn egg named "&aChoose Pet" with lore "","&7Pick a pet from pets storage" to close then run function run_p_cmd(player, "/petswitch")
-		format gui slot 21 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 22 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 23 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 24 of player with hopper named "&eToggle Pet Item Pickup" with lore "","&7Toggle pet picking up items" to close then run function run_p_cmd(player, "/petpickup")
-		format gui slot 25 of player with diamond sword named "&ePet Behavior" with lore "","&7Choose a behavior for your pet" to close then execute console command "ptbehavior %player%"
-		format gui slot 26 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 27 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 28 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 29 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 30 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 31 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 32 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 33 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 34 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 35 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 36 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 37 of player with book and quill named "&aPet Info" with lore "","&7Display information about current pet" to close then run function run_p_cmd(player, "/petinfo")
-		format gui slot 38 of player with paper named "&eCurrent Pet Skill Details" with lore "","&7Display current skill details about your pet" to close then run function run_p_cmd(player, "/petskill")
-		format gui slot 39 of player with minecart with chest named "&ePets Shop" with lore "","&7Buy new pet from the pets shop" to close then run function run_p_cmd(player, "/petshop")
-		format gui slot 40 of player with {@gui_empty_slots_filler} named " "
-		format gui slot 41 of player with name tag named "&eRename Pet" with lore "","&7Rename your pet" to close then run function run_p_cmd(player, "/petname")
-		format gui slot 42 of player with gold nugget named "&eTrade Pet With Someone" with lore "","&7Trade your pet with someone" to close then run function run_p_cmd(player, "/pettrade")
-		format gui slot 43 of player with tnt named "&cDelete Pet" with lore "","&7Delete current pet permanently" to close then run function run_p_cmd(player, "/petrelease")
-		format gui slot 44 of player with {@gui_empty_slots_filler} named " "
+		set metadata tag "MyPetGUI" of player to chest inventory with 5 rows named {@mypet_gui_title}
+		set slot 0 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 1 of metadata tag "MyPetGUI" of player to chest named "&ePet Inventory" with lore "&7Open pet's inventory." and "&3/petinventory"
+		set slot 2 of metadata tag "MyPetGUI" of player to beacon named "&bPet Beacon" with lore "&7Choose beacon effect for pet." and "&3/petbeacon"
+		set slot 3 of metadata tag "MyPetGUI" of player to spruce sapling named "&aChoose Skill Tree" with lore "&7Pick a skill for pet." and "&3/petchooseskilltree"
+		set slot 4 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 5 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 6 of metadata tag "MyPetGUI" of player to saddle named "&aCall Pet" with lore "&7Call a sent away pet to you." and "&3/petcall"
+		set slot 7 of metadata tag "MyPetGUI" of player to lead named "&cSend Pet Away" with lore "&7Send away current pet." and "&3/petsendaway"
+		set {_c} to 8
+		loop 11 times:
+			set slot {_c} of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+			add 1 to {_c}
+		set slot 19 of metadata tag "MyPetGUI" of player to red bed named "&cStore Pet" with lore "&7Store current pet to your pets storage." and "&3/petstore"
+		set slot 20 of metadata tag "MyPetGUI" of player to bee spawn egg named "&aChoose Pet" with lore "&7Pick a pet from your pets storage." and "&3/petchooseskilltree"
+		set slot 21 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 22 of metadata tag "MyPetGUI" of player to 1 of glowing {@mypet_tool} named {@mypet_tool_name} with lore "&7Click to claim tool"
+		set slot 23 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 24 of metadata tag "MyPetGUI" of player to hopper named "&ePet Item Pickup" with lore "&7Toggle pet picking up items." and "&3/petpickup"
+		set slot 25 of metadata tag "MyPetGUI" of player to diamond sword named "&ePet Behavior" with lore "&7Choose a behavior for your pet."
+		set {_c} to 26
+		loop 11 times:
+			set slot {_c} of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+			add 1 to {_c}
+		set slot 37 of metadata tag "MyPetGUI" of player to book and quill named "&aPet Info" with lore "&7Display information about current pet." and "&3/petinfo"
+		set slot 38 of metadata tag "MyPetGUI" of player to paper named "&ePet Skill Details" with lore "&7Display current skill details for your pet." and "&3/petskill"
+		set slot 39 of metadata tag "MyPetGUI" of player to minecart with chest named "&ePets Shop" with lore "&7Buy new pet from the pets shop." and "&3/petshop"
+		set slot 40 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		set slot 41 of metadata tag "MyPetGUI" of player to name tag named "&eRename Pet" with lore "&7Rename your pet." and "&3/petname <new name>"
+		set slot 42 of metadata tag "MyPetGUI" of player to gold nugget named "&eTrade Pet" with lore "&7Trade your pet with someone." and "&3/pettrade <name> <optional price>"
+		set slot 43 of metadata tag "MyPetGUI" of player to tnt named "&cDelete Pet" with lore "&7Delete current pet permanently." and "&3/petrelease"
+		set slot 44 of metadata tag "MyPetGUI" of player to {@mypet_gui_empty_slots_filler} named " "
+		open (metadata tag "MyPetGUI" of player) to player
+
+on inventory click:
+	if event-inventory = (metadata tag "MyPetGUI" of player):
+		cancel event
+		if index of event-slot is 1:
+			close inventory of player
+			execute player command "/petinventory"
+		else if index of event-slot is 2:
+			close inventory of player
+			execute player command "/petbeacon"
+		else if index of event-slot is 3:
+			close inventory of player
+			execute player command "petchooseskilltree"
+		else if index of event-slot is 6:
+			close inventory of player
+			execute player command "/petcall"
+		else if index of event-slot is 7:
+			close inventory of player
+			execute player command "/petsendaway"
+		else if index of event-slot is 19:
+			close inventory of player
+			execute player command "/petstore"
+		else if index of event-slot is 20:
+			close inventory of player
+			execute player command "/petswitch"
+		else if index of event-slot is 22:
+			close inventory of player
+			execute player command "/pettool"
+		else if index of event-slot is 24:
+			close inventory of player
+			execute player command "/petpickup"
+		else if index of event-slot is 25:
+			close inventory of player
+			execute console command "ptbehavior %player%"
+		else if index of event-slot is 37:
+			close inventory of player
+			execute player command "/petinfo"
+		else if index of event-slot is 38:
+			close inventory of player
+			execute player command "/petskill"
+		else if index of event-slot is 39:
+			close inventory of player
+			execute player command "/petshop"
+		else if index of event-slot is 41:
+			close inventory of player
+			execute player command "/petname"
+		else if index of event-slot is 42:
+			close inventory of player
+			execute player command "/pettrade"
+		else if index of event-slot is 43:
+			close inventory of player
+			execute player command "/petrelease"
+	if event-inventory = (metadata tag "MyPetGUIBehavior" of player):
+		cancel event
+		if index of event-slot is 1:
+			close inventory of player
+			execute player command "/petbehavior Friendly"
+		if index of event-slot is 2:
+			close inventory of player
+			execute player command "/petbehavior Normal"
+		if index of event-slot is 3:
+			close inventory of player
+			execute player command "/petbehavior Raid"
+		if index of event-slot is 5:
+			close inventory of player
+			execute player command "/petbehavior Duel"
+		if index of event-slot is 6:
+			close inventory of player
+			execute player command "/petbehavior Farm"
+		if index of event-slot is 7:
+			close inventory of player
+			execute player command "/petbehavior Aggressive"
 
 command /ptbehavior <player>: #to open the Pet Bevahior GUI
 	description: Open a GUI that displays MyPet Bevahior
-	permission: {@gui_permission}
-	permission message: {@gui_permission_message}
+	permission: {@mypet_gui_permission}
 	executable by: players and console
 	aliases: /pgbehavior, /pgb, /ptb
 	trigger:
 		set {_p} to arg-1
-		wait 1 tick
-		open virtual chest inventory with size 1 named "&8&lMyPet Behavior:" to {_p}
-		wait 1 tick
-		format gui slot 0 of {_p} with {@gui_empty_slots_filler} named " "
-		format gui slot 1 of {_p} with armor stand named "&aFriendly" with lore "&7Pet will not fight even", "&7when it is attacked by anything" to close then run function run_p_cmd({_p}, "/petbehavior Friendly")
-		format gui slot 2 of {_p} with {@gui_empty_slots_filler} named " "
-		format gui slot 3 of {_p} with lead named "&eNormal" with lore "&7Pet will act like a normal wolf" to close then run function run_p_cmd({_p}, "/petbehavior Normal")
-		format gui slot 4 of {_p} with {@gui_empty_slots_filler} named " "
-		format gui slot 5 of {_p} with diamond axe named "&cDuel" with lore "&7Pet will attack other pets with", "&7active duel behavior within a 5 block radius" to close then run function run_p_cmd({_p}, "/petbehavior Duel")
-		format gui slot 6 of {_p} with {@gui_empty_slots_filler} named " "
-		format gui slot 7 of {_p} with diamond sword named "&4Aggressive" with lore "&7Pet attacks automatically everything within", "&715 blocks of the owner" to close then run function run_p_cmd({_p}, "/petbehavior Aggressive")
-		format gui slot 8 of {_p} with {@gui_empty_slots_filler} named " "
+		set metadata tag "MyPetGUIBehavior" of {_p} to chest inventory with 1 rows named "MyPet Behavior: &8(select option)"
+		set slot 0 of metadata tag "MyPetGUIBehavior" of {_p} to {@mypet_gui_empty_slots_filler} named " "
+		set slot 1 of metadata tag "MyPetGUIBehavior" of {_p} to armor stand named "&aFriendly" with lore "&7Pet will not fight even", "&7when it is attacked by anything." and "&3/petbehavior Friendly"
+		set slot 2 of metadata tag "MyPetGUIBehavior" of {_p} to bone named "&eNormal" with lore "&7Pet will act like a normal wolf." and "&3/petbehavior Normal"
+		set slot 3 of metadata tag "MyPetGUIBehavior" of {_p} to lead named "&eRaid" with lore "&7Like normal but the pet doesn't", "&7attack players and their minion.s" and "&3/petbehavior Raid"
+		set slot 4 of metadata tag "MyPetGUIBehavior" of {_p} to {@mypet_gui_empty_slots_filler} named " "
+		set slot 5 of metadata tag "MyPetGUIBehavior" of {_p} to diamond axe named "&cDuel" with lore "&7Pet will attack other pets with active", "&7duel behavior within a 5 block radius." and "&3/petbehavior Duel"
+		set slot 6 of metadata tag "MyPetGUIBehavior" of {_p} to bow named "&4Farm" with lore "&7Attacks every Monster within", "&715 blocks of the owner." and "&3/petbehavior Farm"
+		set slot 7 of metadata tag "MyPetGUIBehavior" of {_p} to diamond sword named "&4Aggressive" with lore "&7Pet attacks automatically everything", "&7within 15 blocks of the owner." and "&3/petbehavior Aggressive"
+		set slot 8 of metadata tag "MyPetGUIBehavior" of {_p} to {@mypet_gui_empty_slots_filler} named " "
+		open (metadata tag "MyPetGUIBehavior" of {_p}) to {_p}
 
-function run_p_cmd(p: player,cmd: text): #Adds a neccessry delay between excuting the player command and closing the GUI window
-	wait 1 tick
-	execute {_p} command "%{_cmd}%"
+command /pettool:
+	description: Gives the player MyPet Command Tool
+	permission: {@mypet_tool_permission}
+	executable by: players
+	aliases: /mypettool, /ptool
+	trigger:
+		set {mypet_tool_cooldown_difference::%player's uuid%} to difference between {mypet_tool_cooldown_remaining::%player's uuid%} and now
+		set {mypet_tool_cooldown_left::%player's uuid%} to difference between {@mypet_tool_cooldown} and {mypet_tool_cooldown_difference::%player's uuid%}
+		if {mypet_tool_cooldown_left::%player's uuid%} is less than 3 hours:
+			if player has permission "mypetgui.tool.cooldown.bypass":
+				if player can hold 1 portal:
+					give player 1 of glowing {@mypet_tool} named {@mypet_tool_name} with lore "&7Right-click: &ePet Inventory", "&7Left-click: &aChoose Pet", "&7Sneak Right-click: &cStore Pet" and "&7Sneak Left-click: &aPet Skilltree"
+					set {mypet_tool_cooldown_remaining::%player's uuid%} to now
+				else:
+					if {@mypet_tool_fullinv} contains "drop":
+						drop 1 of glowing {@mypet_tool} named {@mypet_tool_name} with lore "&7Right-click: &ePet Inventory", "&7Left-click: &aChoose Pet", "&7Sneak Right-click: &cStore Pet" and "&7Sneak Left-click: &aPet Skilltree" at location of player
+						set {mypet_tool_cooldown_remaining::%player's uuid%} to now
+						send "&cYour inventory is full, &apet tool has been dropped on ground."
+					else:
+						send "&cYou don't have enough space in your inventory."
+			else:
+				send "&cPlease wait &e%{mypet_tool_cooldown_left::%player's uuid%}% &cbefore requesting another tool."
+		else:
+			if player can hold 1 portal:
+				give player 1 of glowing {@mypet_tool} named {@mypet_tool_name} with lore "&7Right-click: &ePet Inventory", "&7Left-click: &aChoose Pet", "&7Sneak Right-click: &cStore Pet" and "&7Sneak Left-click: &aPet Skilltree"
+				set {mypet_tool_cooldown_remaining::%player's uuid%} to now
+			else:
+				if {@mypet_tool_fullinv} contains "drop":
+					drop 1 of glowing {@mypet_tool} named {@mypet_tool_name} with lore "&7Right-click: &ePet Inventory", "&7Left-click: &aChoose Pet", "&7Sneak Right-click: &cStore Pet" and "&7Sneak Left-click: &aPet Skilltree" at location of player
+					set {mypet_tool_cooldown_remaining::%player's uuid%} to now
+					send "&cYour inventory is full, &apet tool has been dropped on ground."
+				else:
+					send "&cYou don't have enough space in your inventory."
+
+on right click holding a {@mypet_tool}:
+	if player has permission "{@mypet_tool_permission}":
+		if 1st line of player's tool's lore is "&7Right-click: &ePet Inventory":
+			cancel event
+			if player is sneaking:
+				execute player command "/petstore"
+			else:
+				execute player command "/petinventory"
+
+on left click holding a {@mypet_tool}:
+	if player has permission "{@mypet_tool_permission}":
+		if 1st line of player's tool's lore is "&7Right-click: &ePet Inventory":
+			cancel event
+			if player is sneaking:
+				execute player command "/petchooseskilltree"
+			else:
+				execute player command "/petswitch"
